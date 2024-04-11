@@ -9,11 +9,26 @@ currentUserPrincipalId=$(az ad signed-in-user show --query id -o tsv)
 # az account set -s <subscriptionId>
 
 az group create --name $rgName --location $location
-storageResourceId=$(az storage account create --name $storageAccountName --resource-group $rgName --query id -o tsv)
-az storage cors add --account-name $storageAccountName --allowed-headers '*' --exposed-headers '*' --origins '*' --methods GET HEAD PUT OPTIONS --services 'b'
 
-az role assignment create --assignee $currentUserPrincipalId --role "Storage Account Contributor" --scope $storageResourceId
-az role assignment create --assignee $currentUserPrincipalId --role "Storage Blob Data Contributor" --scope $storageResourceId
+storageResourceId=$(az storage account create --name $storageAccountName --resource-group $rgName --query id -o tsv)
+
+az storage cors add \
+    --account-name $storageAccountName \
+    --allowed-headers '*' \
+    --exposed-headers '*' \
+    --origins '*' \
+    --methods GET HEAD PUT OPTIONS \
+    --services 'b'
+
+az role assignment create \
+    --assignee $currentUserPrincipalId \
+    --role "Storage Account Contributor" \
+    --scope $storageResourceId
+
+az role assignment create \
+    --assignee $currentUserPrincipalId \
+    --role "Storage Blob Data Contributor" \
+    --scope $storageResourceId
 
 id=$(az ad app create \
     --display-name $appName \
