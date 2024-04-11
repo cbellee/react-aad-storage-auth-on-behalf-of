@@ -26,9 +26,7 @@ const msalConfiguration = {
 const pca = new PublicClientApplication(msalConfiguration);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <MsalProvider instance={pca}>
-      <App />
-    </MsalProvider>
-  </React.StrictMode>
+  <MsalProvider instance={pca}>
+    <App />
+  </MsalProvider>
 )
