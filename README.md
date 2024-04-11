@@ -15,6 +15,6 @@
   - `$ ./setup.sh`
 - Browse to `http://localhost:5173` to view the app
 - You will be prompted for Admin Consent for the app. You'll need to have EntraID tenant admin rights to do this.
-![alt text](consent_popup.png "Consent Popup")
+![alt text](./app/consent_popup.png "Consent Popup")
 
-![alt text](app.png "App")
+![alt text](./app/app.png "App")
